@@ -1,63 +1,410 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarımda Verim</title>
     <meta name="description" content="Tarımda Verim">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS ve Fontlar -->
+    <link href="./output.css" rel="stylesheet">
+    <link rel="stylesheet" href="animate.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <script src="wow.min.js"></script>
+    <script>
+    new WOW({animateClass: 'wow animate__animated'}).init();
+    </script>
+    <style>
+        :root {
+            --animate-duration: 1.2s;
+            --animate-delay: 0.3s;
+        }
+        html {
+    scroll-behavior: smooth;
+}
+
+        .roboto-text {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .scroll-snap {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        .snap-section {
+            scroll-snap-align: start;
+        }
+
+        .bg-section {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
-<body class="bg-cover bg-fixed bg-center scroll-smooth" style="background-image: url('bg.jpg');">
 
-    <div class="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth" style="scrollbar-width: none;">
+<body class="bg-cover bg-fixed bg-center h-screen snap-y snap-mandatory scroll-smooth" style="background-image: url('bg.webp');">
+    <!-- Navigasyon -->
+     <div class="h-screen overflow-y-visible snap-y snap-mandatory scroll-smooth scroll-container">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 text-white p-4 wow animate__animated animate__fadeInDown snap-start">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#home" class="text-white text-xl font-bold wow animate__animated animate__pulse animate__infinite animate__slower">TARIMDA VERİM</a>
 
-        <div class="bg-black bg-opacity-50 relative z-10 text-center p-4 h-screen flex flex-col items-center justify-center snap-start">
-            <h1 class="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold roboto-text">TARIMDA VERİM</h1>
-            <p class="text-white mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl">
-                Takımımız, tarım alanında verimliliği en üst seviyeye çıkarmayı amaçlamakta olup, Türkiye'deki geleneksel tarımı modern dünyaya entegre ederek ülkemizde üretilen tarım ürünlerinin dünya standartlarına daha entegre olmasını hedeflemektedir. Takımımız, bu amaçla tarımda son teknoloji ilaçlama ve veri analizi sistemlerini, erişilebilir fiyatlarla çiftçilerimizin kullanımına sunmayı amaçlamaktadır.
-                Tarımda Verim takımımız, bu amaç için geliştirdiği projeyle Teknofest İstanbul 2025 ve Turkcell Yarının Teknoloji Liderleri yarışmalarına katılacaktır.
-            </p>
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20" id="scroll-arrow">
-                <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7 7 7-7"></path>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-green-400 transition duration-300 wow animate__animated animate__fadeIn animate__delay-1s">Ana Sayfa</a>
+                <a href="#about" class="hover:text-green-400 transition duration-300 wow animate__animated animate__fadeIn animate__delay-1s">Hakkımızda</a>
+                <a href="#investors" class="hover:text-green-400 transition duration-300 wow animate__animated animate__fadeIn animate__delay-1s">Yatırımcı</a>
+                <a href="#randd" class="hover:text-green-400 transition duration-300 wow animate__animated animate__fadeIn animate__delay-1s">AR-GE</a>
+                <a href="#agriculture" class="hover:text-green-400 transition duration-300 wow animate__animated animate__fadeIn animate__delay-1s">Tarım</a>
+                <a href="#sustainability" class="hover:text-green-400 transition duration-300 wow animate__animated animate__fadeIn animate__delay-1s">Sürdürülebilirlik</a>
+                <a href="#contact" class="hover:text-green-400 transition duration-300 wow animate__animated animate__fadeIn animate__delay-1s">İletişim</a>
+            </div>
+
+            <!-- Mobil Menü Butonu -->
+            <button id="mobile-menu-btn" class="md:hidden text-white wow animate__animated animate__fadeIn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
+            </button>
+        </div>
+
+        <!-- Mobil Menü -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-90 p-4 mt-2 wow animate__animated animate__fadeIn">
+            <a href="#home" class="block py-2 hover:text-green-400 transition duration-300">Ana Sayfa</a>
+            <a href="#about" class="block py-2 hover:text-green-400 transition duration-300">Hakkımızda</a>
+            <a href="#investors" class="block py-2 hover:text-green-400 transition duration-300">Yatırımcı</a>
+            <a href="#randd" class="block py-2 hover:text-green-400 transition duration-300">AR-GE</a>
+            <a href="#agriculture" class="block py-2 hover:text-green-400 transition duration-300">Tarım</a>
+            <a href="#sustainability" class="block py-2 hover:text-green-400 transition duration-300">Sürdürülebilirlik</a>
+            <a href="#contact" class="block py-2 hover:text-green-400 transition duration-300">İletişim</a>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    
+        <!-- Ana Sayfa -->
+        <div id="home" class="bg-section relative z-10 text-center p-4 h-screen flex flex-col items-center justify-center snap-start scroll-item">
+            <div class="wow animate__animated animate__zoomIn">
+                <h1 class="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold roboto-text mb-6">TARIMDA VERİM</h1>
+                <p class="text-white mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl wow animate__animated animate__fadeInUp animate__delay-1s">
+                    Modern teknolojilerle Türkiye tarımını dünya standartlarına taşıyoruz.
+                    Teknofest 2025 ve Turkcell Yarının Teknoloji Liderleri yarışmalarına
+                    hazırlanıyoruz.
+                </p>
+            </div>
+
+            <!-- Aşağı Ok -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#about">
+                    <svg class="w-10 h-10 text-white hover:text-green-400 transition duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7 7 7-7"></path>
+                    </svg>
+                </a>
             </div>
         </div>
 
-        <div class="relative z-10 bg-black bg-opacity-70 text-white text-center px-8 py-12 flex flex-col items-center justify-center">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text">HAKKIMIZDA</h2>
-            <p class="mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl">
-                Tarımda Verim takımımız, tarım alanında akıllı teknolojileri kullanarak verimliliği ve kaliteyi artırmayı hedefleyen bir ekiptir. Çiftçilerimize yapay zeka destekli veri analizi ve otonom ilaçlama yardımıyla verimliliği ve kaliteyi artırmayı hedefleyen bir sistem geliştiriyoruz. Takımımız İzmir Ekonomi Üniversitesi öğrencilerinden oluşmakta olup, tarımda sürdürülebilirliği sağlamak amacıyla kurulmuştur.
-            </p>
+        <!-- Hakkımızda -->
+        <div id="about" class="relative z-10 bg-section text-white text-center px-8 py-12 flex flex-col items-center justify-center h-screen snap-start scroll-item">
+            <div class="wow animate__animated animate__fadeInLeft">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text mb-8">HAKKIMIZDA</h2>
+                <p class="mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl wow animate__animated animate__fadeInRight animate__delay-1s">
+                    İzmir Ekonomi Üniversitesi öğrencilerinden oluşan ekibimiz, yapay zeka
+                    destekli tarım çözümleri geliştiriyor.
+                </p>
+            </div>
+
+            <!-- Navigasyon Okları -->
+            <div class="flex justify-center w-full absolute top-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#agriculture" class="text-white hover:text-green-400 transition duration-300">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#investors">
+                    <svg class="w-10 h-10 text-white hover:text-green-400 transition duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7 7 7-7"></path>
+                    </svg>
+                </a>
+            </div>
         </div>
 
-        <div id="about-us" class="text-center text-white p-8 bg-black bg-opacity-70 snap-start">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text text-white m-4">İLETİŞİM</h2>
-            <p class="mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl">
-                Takımımız projemizin gerçekleştirilebilmesi amacıyla her türlü sponsorluk desteğini değerlendirmeye açıktır.
-                İletmek istediğiniz herhangi bir konuda takımımızla e-mail adresimiz üzerinden irtibata geçebilirsiniz.
-            </p>
-            <a href="mailto:info@tarimdaverim.com" class="mt-4 text-xl text-white hover:text-gray-300">info@tarimdaverim.com</a>
+        <!-- Yatırımcı -->
+        <div id="investors" class="relative z-10 bg-section text-white text-center px-8 py-12 flex flex-col items-center justify-center h-screen snap-start scroll-item">
+            <div class="wow animate__animated animate__fadeInUp">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text mb-8">KURUMSAL YATIRIMCI</h2>
+                <div class="mt-6 text-base sm:text-lg md:text-xl mx-auto max-w-6xl">
+                    <p class="mb-8 wow animate__animated animate__fadeIn animate__delay-1s">
+                        Sürdürülebilir tarım teknolojilerine yatırım fırsatları sunuyoruz.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                        <div class="bg-green-800 bg-opacity-40 p-6 rounded-lg card-hover wow animate__animated animate__zoomIn animate__delay-1s">
+                            <h3 class="text-xl font-bold mb-3">Yatırım Fırsatları</h3>
+                            <ul class="text-left list-disc list-inside">
+                                <li>Sürdürülebilir tarım teknolojileri</li>
+                                <li>Ekolojik dengeye katkı</li>
+                                <li>Akıllı sistemler</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-800 bg-opacity-40 p-6 rounded-lg card-hover wow animate__animated animate__zoomIn animate__delay-1s">
+                            <h3 class="text-xl font-bold mb-3">Yatırımcı Avantajları</h3>
+                            <ul class="text-left list-disc list-inside">
+                                <li>Büyüyen tarım sektöründe söz sahibi</li>
+                                <li>Dijital dönüşüme öncülük</li>
+                                <li>Çiftçilere doğrudan katkı</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigasyon Okları -->
+            <div class="flex justify-center w-full absolute top-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#agriculture" class="text-white hover:text-green-400 transition duration-300">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#randd">
+                    <svg class="w-10 h-10 text-white hover:text-green-400 transition duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7 7 7-7"></path>
+                    </svg>
+                </a>
+            </div>
         </div>
 
+        <!-- AR-GE -->
+        <div id="randd" class="relative z-10 bg-section text-white text-center px-8 py-12 flex flex-col items-center justify-center h-screen snap-section scroll-item">
+            <div class="wow animate__fadeInRight">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text mb-8">AR-GE</h2>
+                <div class="mt-6 text-base sm:text-lg md:text-xl mx-auto max-w-6xl">
+                    <p class="mb-8 wow animate__fadeIn animate__delay-1s">
+                        Yenilikçi teknolojilerle tarımsal verimliliği artırıyoruz.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <div class="bg-blue-900 bg-opacity-40 p-5 rounded-lg card-hover wow animate__fadeInUp animate__delay-1s">
+                            <h3 class="text-xl font-bold mb-2">Yapay Zeka Analiz</h3>
+                            <p>Toprak ve bitki verilerinin AI ile analizi</p>
+                        </div>
+                        <div class="bg-blue-900 bg-opacity-40 p-5 rounded-lg card-hover wow animate__fadeInUp animate__delay-2s">
+                            <h3 class="text-xl font-bold mb-2">Otonom İlaçlama</h3>
+                            <p>Drone ve robotik sistemlerle hassas ilaçlama</p>
+                        </div>
+                        <div class="bg-blue-900 bg-opacity-40 p-5 rounded-lg card-hover wow animate__fadeInUp animate__delay-3s">
+                            <h3 class="text-xl font-bold mb-2">Veri Platformları</h3>
+                            <p>Çiftçiler için entegre dijital platform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigasyon Okları -->
+            <div class="flex justify-center w-full absolute top-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#agriculture" class="text-white hover:text-green-400 transition duration-300">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20 wow animate__infinite animate__slow ">
+                <a href="#agriculture">
+                    <svg class="w-10 h-10 text-white hover:text-green-400 transition duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7 7 7-7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Tarım -->
+        <div id="agriculture" class="relative z-10 bg-section text-white text-center px-8 py-12 flex flex-col items-center justify-center h-screen snap-section scroll-item">
+            <div class="wow wow animate__animated animate__fadeInLeft">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text mb-8 animatesection">TARIM</h2>
+                <div class="mt-6 text-base sm:text-lg md:text-xl mx-auto max-w-6xl">
+                    <p class="wow bounceInUp mb-8 wow animate__animated animate__fadeInRight animate__delay-1s">
+                        Modern teknolojilerle Türkiye'nin tarım potansiyelini verimli hale
+                        getiriyoruz.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <div class="bg-green-700 bg-opacity-40 p-5 rounded-lg card-hover wow wow animate__animated animate__zoomIn animate__delay-1s">
+                            <h3 class="text-xl font-bold mb-2">Hassas Tarım</h3>
+                            <p>Toprak özelliklerine göre özelleştirilmiş uygulamalar</p>
+                        </div>
+                        <div class="bg-green-700 bg-opacity-40 p-5 rounded-lg card-hover wow wow animate__animated animate__zoomIn animate__delay-2s">
+                            <h3 class="text-xl font-bold mb-2">Akıllı Sulama</h3>
+                            <p>Bitki ihtiyacına göre programlanabilen sistemler</p>
+                        </div>
+                        <div class="bg-green-700 bg-opacity-40 p-5 rounded-lg card-hover wow wow animate__animated animate__zoomIn animate__delay-3s">
+                            <h3 class="text-xl font-bold mb-2">Tarımsal Eğitim</h3>
+                            <p>Modern tarım teknikleri konusunda eğitimler</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigasyon Okları -->
+            <div class="flex justify-center w-full absolute top-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#agriculture" class="text-white hover:text-green-400 transition duration-300">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#sustainability">
+                    <svg class="w-10 h-10 text-white hover:text-green-400 transition duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7 7 7-7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sürdürülebilirlik -->
+        <div id="sustainability" class="relative z-10 bg-section text-white text-center px-8 py-12 flex flex-col items-center justify-center h-screen snap-section animatesection scroll-item">
+            <div class="wow animate__animated animate__fadeInUp animatesection">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text mb-8">SÜRDÜRÜLEBİLİRLİK</h2>
+                <div class="mt-6 text-base sm:text-lg md:text-xl mx-auto max-w-6xl">
+                    <p class="wow mb-8  animate__fadeIn animate__delay-1s animatesection">
+                        Projelerimizin merkezine sürdürülebilirliği koyuyoruz.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                        <div class="bg-teal-800 bg-opacity-40 p-5 rounded-lg card-hover wow animate__animated animate__fadeInLeft">
+                            <h3 class="text-xl font-bold mb-2">Çevresel Etki</h3>
+                            <ul class="text-left list-disc list-inside">
+                                <li>Minimum kimyasal kullanımı</li>
+                                <li>Su tasarrufu</li>
+                                <li>Karbon ayak izini azaltma</li>
+                            </ul>
+                        </div>
+                        <div class="wow animate__animated animate__fadeInRight">
+                        <div class="wow bg-teal-800 bg-opacity-40 p-5 rounded-lg card-hover animate__delay-2s animatesection">
+                            <h3 class="text-xl font-bold mb-2">Ekonomik Sürdürülebilirlik</h3>
+                            <ul class="text-left list-disc list-inside">
+                                <li>Çiftçi gelirlerini artırma</li>
+                                <li>Üretim maliyetlerini düşürme</li>
+                                <li>Kırsal ekonomiyi canlandırma</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigasyon Okları -->
+            <div class="flex justify-center w-full absolute top-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#agriculture" class="text-white hover:text-green-400 transition duration-300">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20 wow animate__animated animate__infinite animate__slow">
+                <a href="#contact">
+                    <svg class="w-10 h-10 text-white hover:text-green-400 transition duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7 7 7-7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- İletişim -->
+        <div id="contact" class="text-center relative text-white p-8 bg-black bg-opacity-70 h-screen flex flex-col items-center justify-center snap-section animate__fadeIn animatesection scroll-item">
+            <div class="wow flex justify-center w-full absolute top-20 animate__infinite animate__slow">
+                <a href="#sustainability" class="text-white hover:text-green-400 transition duration-300">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text m-4 wow animate__animated animate__pulse animate__infinite animate__slower">İLETİŞİM</h2>
+                <p class="mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl wow animate__animated animate__fadeInUp animate__delay-1s">
+                    Sponsorluk ve iş birlikleri için iletişime geçin.
+                </p>
+                <div class="mt-8 wow animate__animated animate__tada animate__delay-2s">
+                    <a href="mailto:info@tarimdaverim.com" class="text-xl text-white hover:text-green-400 transition duration-300 flex items-center justify-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        info@tarimdaverim.com
+                    </a>
+                </div>
+            </div>
+
+            <!-- Navigasyon Oku -->
+            
+        </div>
     </div>
 
+    <!-- JavaScript -->
+  
     <script>
-        document.getElementById('scroll-arrow').addEventListener('click', function() {
-            document.getElementById('about-us').scrollIntoView({
-                behavior: 'smooth'
+        
+        // Mobil menü toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.add('wow animate__animated', 'animate__fadeInDown');
+        });
+
+        // Mobil menü linklerine tıklanınca menüyü kapat
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
             });
         });
+        
+        const wrapper = document.querySelector('.scroll-container');
+const items = document.querySelectorAll('.scroll-item');
+
+let isScrolling = false;
+
+wrapper.addEventListener('wheel', (e) => {
+  e.preventDefault(); // Prevent default scroll behavior
+
+  if (isScrolling) return; // Prevent multiple triggers if already scrolling
+
+  isScrolling = true;
+
+  // Determine scroll direction (down or up)
+  const direction = e.deltaY > 0 ? 'down' : 'up';
+
+  let currentItem;
+
+  if (direction === 'down') {
+    // Find the first item that is below the top of the viewport
+    currentItem = [...items].find(item => item.getBoundingClientRect().top > 0);
+  } else {
+    // Find the last item that is above the bottom of the viewport
+    currentItem = [...items].reverse().find(item => item.getBoundingClientRect().bottom < window.innerHeight);
+  }
+
+  if (currentItem) {
+    // Scroll the item into view with smooth scrolling
+    currentItem.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
+  // Reset the scrolling state after the scroll action
+  setTimeout(() => {
+    isScrolling = false;
+  }, 600); // Timeout is approximately the duration of smooth scroll
+});
     </script>
 </body>
 
-<style>
-    .roboto-text {
-        font-family: "Roboto", sans-serif;
-        font-weight: 800;
-    }
-</style>
 </html>
