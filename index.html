@@ -372,15 +372,22 @@ const items = document.querySelectorAll('.scroll-item');
 
 let isScrolling = false;
 
-wrapper.addEventListener('wheel', (e) => {
+const handleScroll = (e) => {
   e.preventDefault(); // Prevent default scroll behavior
 
   if (isScrolling) return; // Prevent multiple triggers if already scrolling
 
   isScrolling = true;
 
-  // Determine scroll direction (down or up)
-  const direction = e.deltaY > 0 ? 'down' : 'up';
+  // Determine scroll direction
+  let direction;
+
+  if (e.type === 'wheel') {
+    direction = e.deltaY > 0 ? 'down' : 'up';
+  } else if (e.type === 'touchmove') {
+    const touchMove = e.touches[0].clientY - touchStartY;
+    direction = touchMove > 0 ? 'up' : 'down';
+  }
 
   let currentItem;
 
@@ -404,7 +411,20 @@ wrapper.addEventListener('wheel', (e) => {
   setTimeout(() => {
     isScrolling = false;
   }, 600); // Timeout is approximately the duration of smooth scroll
+};
+
+// Add event listener for mouse wheel
+wrapper.addEventListener('wheel', handleScroll);
+
+// Add event listener for touchstart and touchmove
+let touchStartY = 0;
+
+wrapper.addEventListener('touchstart', (e) => {
+  touchStartY = e.touches[0].clientY; // Get the initial touch position
 });
+
+wrapper.addEventListener('touchmove', handleScroll);
+
     </script>
 </body>
 
