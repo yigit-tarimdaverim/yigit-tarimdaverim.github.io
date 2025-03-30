@@ -996,6 +996,10 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .md\:overflow-x-visible {
+    overflow-x: visible;
+  }
+
   .md\:text-5xl {
     font-size: 3rem;
     line-height: 1;
