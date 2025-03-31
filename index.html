@@ -16,9 +16,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
     <script src="wow.min.js"></script>
-    <script>
-    new WOW({animateClass: 'wow animate__animated'}).init();
-    </script>
     <style>
         :root {
             --animate-duration: 1.2s;
@@ -99,9 +96,9 @@ body::-webkit-scrollbar:horizontal { display: none; }
     
         <!-- Ana Sayfa -->
         <div id="home" class="bg-section relative z-10 text-center p-4 h-screen flex flex-col items-center justify-center snap-start scroll-item">
-            <div class="wow animate__animated animate__zoomIn" data-wow-delay="0.5s">
+            <div class="wow animate__animated animate__zoomIn" data-wow-delay="1s">
                 <h1 class="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold roboto-text mb-6">TARIMDA VERİM</h1>
-                <p class="text-white mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl wow animate__animated animate__fadeInUp animate__delay-1s">
+                <p class="text-white mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl wow animate__animated animate__fadeInUp animate__delay-1s" data-wow-delay="1s">
                     Modern teknolojilerle Türkiye tarımını dünya standartlarına taşıyoruz.
                     Teknofest 2025 ve Turkcell Yarının Teknoloji Liderleri yarışmalarına
                     hazırlanıyoruz.
@@ -120,7 +117,7 @@ body::-webkit-scrollbar:horizontal { display: none; }
 
         <!-- Hakkımızda -->
         <div id="about" class="relative z-10 bg-section text-white text-center px-8 py-12 flex flex-col items-center justify-center h-screen snap-start scroll-item">
-            <div class="wow animate__animated animate__fadeInLeft" data-wow-delay="0.5s">
+            <div class="wow animate__animated animate__fadeInLeft" data-wow-delay="1s">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold roboto-text mb-8">HAKKIMIZDA</h2>
                 <p class="mt-4 text-base sm:text-lg md:text-xl mx-auto max-w-6xl wow animate__animated animate__fadeInRight animate__delay-1s" data-wow-delay="1s">
                     İzmir Ekonomi Üniversitesi öğrencilerinden oluşan ekibimiz, yapay zeka
@@ -247,11 +244,11 @@ body::-webkit-scrollbar:horizontal { display: none; }
                             <h3 class="text-xl font-bold mb-2">Hassas Tarım</h3>
                             <p>Toprak özelliklerine göre özelleştirilmiş uygulamalar</p>
                         </div>
-                        <div class="bg-green-700 bg-opacity-40 p-5 rounded-lg card-hover wow wow animate__animated animate__zoomIn animate__delay-1s" data-wow-delay="2s">
+                        <div class="bg-green-700 bg-opacity-40 p-5 rounded-lg card-hover wow wow animate__animated animate__zoomIn animate__delay-1s" data-wow-delay="1s">
                             <h3 class="text-xl font-bold mb-2">Akıllı Sulama</h3>
                             <p>Bitki ihtiyacına göre programlanabilen sistemler</p>
                         </div>
-                        <div class="bg-green-700 bg-opacity-40 p-5 rounded-lg card-hover wow wow animate__animated animate__zoomIn animate__delay-1s" data-wow-delay="3s">
+                        <div class="bg-green-700 bg-opacity-40 p-5 rounded-lg card-hover wow wow animate__animated animate__zoomIn animate__delay-1s" data-wow-delay="1s">
                             <h3 class="text-xl font-bold mb-2">Tarımsal Eğitim</h3>
                             <p>Modern tarım teknikleri konusunda eğitimler</p>
                         </div>
@@ -371,15 +368,44 @@ body::-webkit-scrollbar:horizontal { display: none; }
             });
         });
         
-        const wrapper = document.querySelector('.scroll-container');
-const items = document.querySelectorAll('.scroll-item');
+     // Global flag to track if an animation is running
+let isAnimating = false;
 
+// Initialize WOW.js with a callback to manage scrolling behavior
+const wow = new WOW({
+  boxClass: 'wow', // class for animated elements
+  animateClass: 'animate__animated', // animation class
+  offset: 0, // offset to trigger animations
+  mobile: true, // enable animations on mobile
+  live: true, // watch for dynamically added content
+  callback: (box) => {
+    // Callback when an animation is triggered
+    isAnimating = true;
+
+    // Re-enable scrolling after the animation ends
+    const resetAnimation = () => {
+      isAnimating = false;
+    };
+
+    // Listen for the end of the animation
+    box.addEventListener('animationend', resetAnimation);
+    box.addEventListener('oanimationend', resetAnimation); // for older browsers
+    box.addEventListener('webkitAnimationEnd', resetAnimation); // for webkit browsers
+    box.addEventListener('MSAnimationEnd', resetAnimation); // for IE
+  }
+});
+
+wow.init();
+
+// Prevent scroll or swipe during animation
+const wrapper = document.querySelector('.scroll-container');
+const items = document.querySelectorAll('.scroll-item');
 let isScrolling = false;
 
 const handleScroll = (e) => {
-  e.preventDefault(); // Prevent default scroll behavior
+  if (isAnimating || isScrolling) return; // If animation is playing, prevent scroll
 
-  if (isScrolling) return; // Prevent multiple triggers if already scrolling
+  e.preventDefault(); // Prevent default scroll behavior
 
   isScrolling = true;
 
@@ -428,6 +454,7 @@ wrapper.addEventListener('touchstart', (e) => {
 });
 
 wrapper.addEventListener('touchmove', handleScroll);
+
 
 
     </script>
