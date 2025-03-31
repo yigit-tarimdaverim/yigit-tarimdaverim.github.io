@@ -411,10 +411,10 @@ const handleScroll = (e) => {
     });
   }
 
-  // Reset the scrolling state after the scroll action
-  setTimeout(() => {
+  // Use requestAnimationFrame for smoother scroll handling
+  requestAnimationFrame(() => {
     isScrolling = false;
-  }, 600); // Timeout is approximately the duration of smooth scroll
+  });
 };
 
 // Add event listener for mouse wheel
@@ -428,6 +428,7 @@ wrapper.addEventListener('touchstart', (e) => {
 });
 
 wrapper.addEventListener('touchmove', handleScroll);
+
 
     </script>
 </body>
