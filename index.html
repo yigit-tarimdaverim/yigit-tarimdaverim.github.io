@@ -367,6 +367,11 @@ body::-webkit-scrollbar:horizontal { display: none; }
                 document.getElementById('mobile-menu').classList.add('hidden');
             });
         });
+
+        window.onload = function() {
+    // similar behavior as clicking on a link
+    window.location.href = "#home";
+}
         
      // Global flag to track if an animation is running
 let isAnimating = false;
