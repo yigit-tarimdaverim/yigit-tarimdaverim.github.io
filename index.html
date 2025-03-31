@@ -368,10 +368,24 @@ body::-webkit-scrollbar:horizontal { display: none; }
             });
         });
 
+
+
+
+
+        setTimeout(function() {
+    // Make sure the page has fully loaded before redirecting
+    if (document.readyState === "complete") {
+        // Change the URL to the anchor #home after 1 second
+        window.location.href = "#home";
+    } else {
+        // If the page isn't fully loaded, wait until it's ready
         window.onload = function() {
-    // similar behavior as clicking on a link
-    window.location.href = "#home";
-}
+            window.location.href = "#home";
+        }
+    }
+}, 2000);
+
+        
         
      // Global flag to track if an animation is running
 let isAnimating = false;
